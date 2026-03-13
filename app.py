@@ -76,16 +76,20 @@ KNOWLEDGE = {
              "hint": "Also known as the Kulasekharas"},
         ],
         "qa": [
-            {"keywords": ["chera","dynasty","kulasekharas","kings","who ruled","rulers"],
-             "answer": "The **Chera Dynasty** ruled Kerala from approximately **800 to 1102 CE**. Their capital was **Mahodayapuram** (modern Kodungallur). The Cheras were known for their powerful navy, patronage of the arts, and grand temple construction.\n\nA scroll whispers: The last great Chera king donated the Thiruvanchikulam temple."},
-            {"keywords": ["trade","spice","pepper","black gold","roman","port","musiri","export"],
-             "answer": "Kerala was the world's **spice capital** in the ancient era. **Black pepper** was Kerala's most prized export, traded with the **Roman Empire, Arabia, and China**. The ancient port of **Musiri** was so famous that Roman authors described it as teeming with ships.\n\nA scroll whispers: Roman coins have been found in archaeological digs across Kerala."},
-            {"keywords": ["sangam","literature","poetry","tamil","culture","arts"],
-             "answer": "The **Sangam era** produced remarkable Tamil poetry documenting Chera kings in vivid detail. Works like the Purananuru describe Chera rulers and their battles. The famous king **Senguttuvan** is celebrated in the epic Silappatikaram.\n\nA scroll whispers: Sangam poets described Kerala's landscape so precisely that modern scholars use their verses to identify ancient locations."},
-            {"keywords": ["religion","temple","hindu","buddhism","faith","worship"],
-             "answer": "Ancient Kerala was a land of religious diversity. **Hinduism** dominated with grand temples, but **Buddhism** and **Jainism** also flourished. The **Vadakkunnathan Temple** in Thrissur was an important Chera royal shrine. Kerala's famous Theyyam ritual performances have roots going back over 1,500 years."},
-            {"keywords": ["decline","fall","collapse","chola","invasion","end","1102"],
-             "answer": "The Chera Dynasty **collapsed around 1102 CE** after prolonged conflict with the powerful **Chola Empire** from Tamil Nadu. Repeated invasions weakened central authority, causing the kingdom to fragment into smaller rival chieftaincies.\n\nA scroll whispers: After the Chera collapse, no single ruler unified all of Kerala again until 1947."},
+            {"keywords": ["chera","dynasty","kulasekharas","kings","who ruled","rulers","kingdom","founded"],
+             "answer": "The **Chera Dynasty** (Kulasekharas) ruled Kerala from approximately **800 to 1102 CE**. Their capital was **Mahodayapuram** (modern Kodungallur). The Cheras had a powerful navy, patronised the arts, and built grand temples. They controlled the entire Kerala coast and its valuable spice trade.\n\nA scroll whispers: The last great Chera king donated the Thiruvanchikulam temple — it still stands today."},
+            {"keywords": ["trade","spice","pepper","black gold","roman","port","musiri","export","silk","rome"],
+             "answer": "Kerala was the world's **spice capital** in the ancient era. **Black pepper** (called black gold) was Kerala's most prized export, traded with the **Roman Empire, Arabia, and China**. The ancient port of **Musiri** (Kodungallur) was described by Roman authors as teeming with ships. Romans traded gold coins for pepper in such quantities that emperors complained it was draining Rome's treasury.\n\nA scroll whispers: Roman coins from the 1st century CE have been found in archaeological digs across Kerala."},
+            {"keywords": ["sangam","literature","poetry","tamil","culture","arts","senguttuvan","purananuru"],
+             "answer": "The **Sangam era** (300 BCE – 300 CE) produced remarkable Tamil poetry documenting Chera kings. Works like the **Purananuru** describe Chera rulers and battles in vivid detail. King **Senguttuvan** is celebrated in the epic **Silappatikaram** for his northern military campaigns.\n\nA scroll whispers: Sangam poets described Kerala's landscape so precisely that modern scholars use their verses to identify ancient ports and cities."},
+            {"keywords": ["religion","temple","hindu","buddhism","jainism","faith","worship","perumal"],
+             "answer": "Ancient Kerala was a land of remarkable religious diversity. **Hinduism** dominated with grand temples, but **Buddhism** and **Jainism** also flourished for centuries. Some Chera kings were devoted Vaishnavas (worshippers of Vishnu), earning the title **Kulasekhara Perumal**. Kerala's Theyyam ritual performances have roots stretching back over 1,500 years.\n\nA scroll whispers: One Chera king is believed to have become a saint — his devotional hymns are still sung in Vaishnava temples today."},
+            {"keywords": ["decline","fall","collapse","chola","invasion","end","1102","fragment","weak"],
+             "answer": "The Chera Dynasty **collapsed around 1102 CE** after prolonged conflict with the powerful **Chola Empire** from Tamil Nadu. Repeated Chola invasions burned the capital Mahodayapuram and weakened central authority, causing the kingdom to shatter into dozens of rival chieftaincies — the Zamorin, Cochin, Travancore, and others that would define medieval Kerala.\n\nA scroll whispers: After the Chera collapse, no single ruler unified all of Kerala again for 845 years."},
+            {"keywords": ["jew","jewish","synagogue","foreigner","arab","china","international","cosmopolitan"],
+             "answer": "Ancient Kerala welcomed merchants from across the world. **Jewish traders** arrived as early as 70 CE after the fall of Jerusalem — the **Paradesi Synagogue** in Kochi (1568) is one of the oldest active synagogues in Asia. Arab merchants called **Mappila** settled along the coast and many converted locals to Islam, creating Kerala's unique Muslim community.\n\nA scroll whispers: Kerala's Jewish community received a copper plate grant from a Chera king guaranteeing them rights and land — one of the oldest royal charters in India."},
+            {"keywords": ["capital","mahodayapuram","kodungallur","cranganore","city","location"],
+             "answer": "The Chera capital **Mahodayapuram** is modern-day **Kodungallur** (also called Cranganore) in central Kerala. It was one of the great port cities of the ancient world, visited by Romans, Arabs, Chinese, and Jewish traders. The city had direct sea routes to the Persian Gulf, Red Sea, and South China Sea.\n\nA scroll whispers: The ancient Cheraman Perumal Mosque in Kodungallur is claimed to be the first mosque built in India — dating to 629 CE."},
         ]
     },
     "chapter-2": {
@@ -109,18 +113,30 @@ KNOWLEDGE = {
              "hint": "They defended the Kerala coast from the Portuguese"},
         ],
         "qa": [
-            {"keywords": ["zamorin","calicut","kozhikode","ruler","king","samoothiri"],
-             "answer": "The **Zamorin** (also Samoothiri) was the powerful ruler of **Calicut**, dominating northern Kerala from the 13th century. Their court welcomed Arab, Chinese, and Jewish merchants. Calicut was one of the most cosmopolitan cities in medieval Asia.\n\nA scroll whispers: The Zamorin's title literally means Lord of the Sea."},
-            {"keywords": ["vasco da gama","portuguese","1498","arrival","explorer","portugal"],
-             "answer": "On **20 May 1498**, Portuguese explorer **Vasco da Gama** arrived at **Calicut**, completing the first direct sea voyage from Europe to India. This broke the Arab monopoly on the spice trade.\n\nA scroll whispers: The profit from da Gama's spice cargo was 60 times the cost of the entire expedition."},
-            {"keywords": ["kunjali","marakkars","naval","navy","sea","fleet","admiral","commander"],
-             "answer": "The **Kunjali Marakkars** were brilliant Muslim naval commanders serving the Zamorin of Calicut. **Kunjali Marakkar IV** disrupted Portuguese shipping so effectively that the Portuguese signed treaties with his enemies just to capture him.\n\nA scroll whispers: Kunjali Marakkar IV is remembered as Admiral of the Malabar Coast."},
-            {"keywords": ["kalaripayattu","kalari","martial art","fighting","combat","warrior","nair"],
-             "answer": "**Kalaripayattu** is the world's oldest surviving martial art, originating in Kerala over **3,000 years ago**. It combines strikes, kicks, grappling, and weapons including the flexible sword called Urumi. Traditionally practiced by the **Nair warrior caste**.\n\nA scroll whispers: The Urumi sword is so dangerous it is only taught to students who have mastered every other weapon."},
-            {"keywords": ["kathakali","dance","mohiniyattam","art","performance","classical","culture","music"],
-             "answer": "Medieval Kerala gave birth to world-famous art forms. **Kathakali** uses elaborate makeup to tell stories from the Mahabharata and Ramayana. **Mohiniyattam** is a graceful solo dance, and **Theyyam** is a ritual performance where the dancer embodies a deity.\n\nA scroll whispers: Kathakali makeup called chutti takes up to 6 hours to apply using natural pigments."},
-            {"keywords": ["arab","ibn battuta","china","chinese","zheng he","merchant","trade network"],
-             "answer": "Medieval Calicut was one of the most **cosmopolitan cities on Earth**. Moroccan traveller **Ibn Battuta** visited in the 14th century and described it as one of the greatest ports he had seen. Chinese admiral **Zheng He** also visited during his treasure fleet voyages.\n\nA scroll whispers: The Chinese fishing nets still used in Kochi today were introduced during this era."},
+            {"keywords": ["zamorin","calicut","kozhikode","ruler","king","samoothiri","rise","power","dynasty"],
+             "answer": "The **Zamorin** (Samoothiri) rose to power in the **13th century**, starting as a local chieftain near Calicut. Through military campaigns and strategic marriages they became the most powerful rulers in northern Kerala, controlling the lucrative pepper and spice trade.\n\nA scroll whispers: The Zamorin's title literally means Lord of the Sea."},
+            {"keywords": ["fall","decline","end","defeat","zamorin","collapse","overthrow","british","tippu"],
+             "answer": "The Zamorin dynasty **fell in stages** across the 18th century. Weakened by **200 years of war with the Portuguese**, then costly wars with the Mysore Sultanate under **Hyder Ali** (1766) and **Tipu Sultan** (1788-1790), who conquered Calicut and forced the Zamorin to flee. After Tipu's defeat by the British in 1799, Malabar including Calicut came under **British East India Company** rule, effectively ending Zamorin independence.\n\nA scroll whispers: The last Zamorin set fire to his own palace rather than surrender to Tipu Sultan's forces."},
+            {"keywords": ["vasco da gama","portuguese","1498","arrival","explorer","portugal","first voyage"],
+             "answer": "On **20 May 1498**, Portuguese explorer **Vasco da Gama** arrived at **Calicut**, completing the first direct sea voyage from Europe to India. He was received by the Zamorin but Arab merchants convinced the ruler not to trade. Da Gama returned in 1502 with warships and bombarded Calicut.\n\nA scroll whispers: The profit from da Gama's spice cargo was 60 times the cost of the entire expedition."},
+            {"keywords": ["portuguese","conflict","war","attack","bombard","kozhikode","spice","trade","monopoly"],
+             "answer": "The **Portuguese-Zamorin wars** lasted from **1500 to 1600s**. Portugal wanted to control the spice trade and repeatedly attacked Calicut. The Zamorin allied with Arab merchants and the Kunjali Marakkars to resist. Despite losing major sea battles, the Zamorin's forces harassed Portuguese ships for decades.\n\nA scroll whispers: The Portuguese once captured and hanged 800 Arab merchants to intimidate the Zamorin — it made him more determined to fight."},
+            {"keywords": ["tipu sultan","hyder ali","mysore","invasion","malabar","18th century"],
+             "answer": "**Hyder Ali** of Mysore invaded Malabar in **1766**, and his son **Tipu Sultan** conquered Calicut in **1788**. Tipu forcibly converted thousands and destroyed temples. The Zamorin burned his palace rather than surrender. After Tipu's death at **Srirangapatna in 1799**, the British took control of Malabar.\n\nA scroll whispers: Tipu Sultan's rockets were so advanced that British engineers studied them to develop their own rocket technology."},
+            {"keywords": ["kunjali","marakkars","naval","navy","sea","fleet","admiral","commander","pirate"],
+             "answer": "The **Kunjali Marakkars** were four generations of brilliant Muslim naval commanders serving the Zamorin. They built a powerful fleet and used guerrilla tactics to harass Portuguese ships. **Kunjali Marakkar IV** was so effective the Portuguese allied with the Zamorin himself to capture him in 1600.\n\nA scroll whispers: Kunjali Marakkar IV was executed in Goa by the Portuguese after betrayal — he remains a hero of Kerala's resistance history."},
+            {"keywords": ["kalaripayattu","kalari","martial art","fighting","combat","warrior","nair","urumi"],
+             "answer": "**Kalaripayattu** is the world's oldest surviving martial art, originating in Kerala over **3,000 years ago**. It combines strikes, kicks, grappling, and weapons including the deadly flexible sword called the **Urumi**. Traditionally trained by the **Nair warrior caste** who served as the Zamorin's army.\n\nA scroll whispers: The Urumi sword is so dangerous it is only taught to students who have mastered every other weapon first."},
+            {"keywords": ["nair","warrior","caste","soldier","army","military","feudal","tharavad"],
+             "answer": "The **Nairs** were the dominant warrior caste of medieval Kerala, serving as soldiers and administrators for rulers like the Zamorin. They followed a **matrilineal system** (property passed through the mother's line) and lived in large ancestral houses called **Tharavads**. Nair men trained in Kalaripayattu from childhood.\n\nA scroll whispers: Nair women also trained in Kalaripayattu and could participate in combat if their household was attacked."},
+            {"keywords": ["kathakali","dance","mohiniyattam","art","performance","classical","culture","music","theyyam"],
+             "answer": "Medieval Kerala produced world-famous art forms. **Kathakali** uses elaborate makeup and costume to tell stories from the Mahabharata and Ramayana. **Mohiniyattam** is a graceful solo dance form. **Theyyam** is a ritual performance where the dancer embodies a deity — practiced in northern Kerala for over 1,000 years.\n\nA scroll whispers: Kathakali makeup called chutti takes up to 6 hours to apply using natural pigments and coconut shell."},
+            {"keywords": ["arab","ibn battuta","china","chinese","zheng he","merchant","trade","cosmopolitan","port"],
+             "answer": "Medieval Calicut was one of the most **cosmopolitan ports on Earth**. Moroccan traveller **Ibn Battuta** visited in the 14th century and called it among the greatest ports he had seen. Chinese admiral **Zheng He** visited during his treasure fleet voyages. Arab, Jewish, Chinese, and African merchants all traded here.\n\nA scroll whispers: The Chinese fishing nets still standing in Kochi today were introduced during Zheng He's era."},
+            {"keywords": ["spice","pepper","trade","route","silk road","wealth","goa","malabar coast"],
+             "answer": "Kerala was the **spice capital of the world** in the medieval era. Black **pepper**, cardamom, cinnamon, and ginger from Kerala were worth more than gold in Europe. The Malabar Coast controlled the entire spice route from Asia to the West, making the Zamorin enormously wealthy.\n\nA scroll whispers: In medieval Europe, pepper was so valuable it was used to pay rents and ransoms."},
+            {"keywords": ["cochin","kochi","kingdom","raja","perumpadapu","port","dutch","alliance"],
+             "answer": "The **Kingdom of Cochin** (Kochi) was a smaller but strategically important rival to the Zamorin. The Raja of Cochin allied first with the **Portuguese** and later the **Dutch** to resist Zamorin domination. The Portuguese built **Fort Manuel** in Cochin in 1503 — the first European fort in India.\n\nA scroll whispers: The Portuguese introduced cashew nuts to Kerala — now one of the state's most important crops."},
         ]
     },
     "chapter-3": {
@@ -144,18 +160,22 @@ KNOWLEDGE = {
              "a": ["1936"], "hint": "Opening temples to all castes"},
         ],
         "qa": [
-            {"keywords": ["battle of colachel","colachel","dutch","voc","1741","marthanda varma","victory"],
-             "answer": "In **1741**, King **Marthanda Varma** of Travancore defeated the **Dutch East India Company** at the **Battle of Colachel** - one of the only decisive Asian victories over a European colonial power in the 18th century. Dutch commander **De Lannoy** was captured and forced to modernise the Travancore army.\n\nA scroll whispers: De Lannoy's grave can still be visited in Udayagiri, Kerala."},
-            {"keywords": ["marthanda varma","travancore","kingdom","unification","padmanabha","king"],
-             "answer": "**Marthanda Varma** (ruled 1729-1758) unified the fragmented southern Kerala chieftaincies into a powerful Travancore kingdom. He dedicated the entire kingdom to **Lord Padmanabha** at the Padmanabhaswamy Temple.\n\nA scroll whispers: The temple's vaults, opened in 2011, contained treasures worth over 22 billion dollars - the largest temple treasure ever discovered."},
-            {"keywords": ["slavery","abolish","1855","social reform","caste","sree narayana","discrimination"],
-             "answer": "Travancore **abolished slavery in 1855** - decades before much of the British Empire. Social reformer **Sree Narayana Guru** fought against caste discrimination with his famous saying: One caste, one religion, one God for humanity.\n\nA scroll whispers: Lower-caste women in parts of Kerala were once taxed for covering their chests - a brutal injustice that reformers ended."},
-            {"keywords": ["temple entry","proclamation","1936","chithira thirunal","caste","untouchables"],
-             "answer": "On **12 November 1936**, Maharaja **Chithira Thirunal** issued the **Temple Entry Proclamation**, opening all government temples to worshippers of all castes. This made Travancore the first Hindu kingdom to officially end caste-based temple discrimination.\n\nA scroll whispers: The proclamation followed the 16-year Vaikom Satyagraha civil disobedience movement."},
-            {"keywords": ["british","east india company","colonial","empire","colonialism","british rule"],
-             "answer": "The **British East India Company** extended influence over Kerala through treaties and pressure. Travancore and Cochin remained **Princely States**, while Malabar was directly administered as part of Madras Presidency.\n\nA scroll whispers: The Malabar Rebellion of 1921 was one of the most significant uprisings against British rule in Kerala."},
-            {"keywords": ["independence","1947","1957","communist","ems","namboodiripad","literacy","modern"],
-             "answer": "Kerala joined independent India on **1 July 1949**. In **1957**, Kerala made world history by electing the **world's first democratic communist government**, led by **E.M.S. Namboodiripad**. Today Kerala is celebrated for its near **100% literacy rate** and the famous **Kerala Model** of development.\n\nA scroll whispers: Kerala sends more nurses and doctors abroad than any other Indian state."},
+            {"keywords": ["battle of colachel","colachel","dutch","voc","1741","marthanda varma","victory","defeat"],
+             "answer": "In **1741**, King **Marthanda Varma** of Travancore defeated the **Dutch East India Company (VOC)** at the **Battle of Colachel** — one of the only decisive Asian victories over a European colonial power in the 18th century. Dutch commander **Eustachius De Lannoy** was captured and later helped modernise the Travancore army.\n\nA scroll whispers: De Lannoy's grave can still be visited in Udayagiri Fort, Kerala today."},
+            {"keywords": ["marthanda varma","travancore","kingdom","unification","padmanabha","king","ruler","founded"],
+             "answer": "**Marthanda Varma** (ruled 1729–1758) is considered the maker of modern Travancore. He unified fragmented southern Kerala chieftaincies through military campaigns and dedicated the entire Travancore kingdom to **Lord Padmanabhaswamy**, declaring himself the deity's servant-king. This unusual act gave him strong religious legitimacy.\n\nA scroll whispers: The Padmanabhaswamy Temple's hidden vaults, opened in 2011, contained treasures worth over 22 billion dollars — the largest temple treasure ever discovered."},
+            {"keywords": ["slavery","abolish","1855","social reform","caste","sree narayana","discrimination","reform","untouchable"],
+             "answer": "Travancore **abolished slavery in 1855** — decades before much of the British Empire. Social reformer **Sree Narayana Guru** (1856–1928) led a powerful movement against caste discrimination with his motto: *One caste, one religion, one God for humanity*. He consecrated temples open to all castes at a time when this was radical.\n\nA scroll whispers: Lower-caste women in parts of Kerala were once brutally taxed for covering their chests — reformers including Sree Narayana Guru fought to end this."},
+            {"keywords": ["temple entry","proclamation","1936","chithira thirunal","caste","vaikom","satyagraha"],
+             "answer": "On **12 November 1936**, Maharaja **Chithira Thirunal** issued the **Temple Entry Proclamation**, opening all government temples in Travancore to Hindus of all castes. This was a landmark moment in Indian social history. It followed the **Vaikom Satyagraha** (1924-1925) — a civil disobedience movement where people including Gandhi protested caste discrimination at Vaikom temple.\n\nA scroll whispers: The Temple Entry Proclamation preceded India's independence by 11 years — Travancore led the way."},
+            {"keywords": ["british","east india company","colonial","empire","colonialism","british rule","malabar","princely"],
+             "answer": "The **British East India Company** extended control over Kerala in stages. After Tipu Sultan's defeat in 1799, they took Malabar directly. Travancore and Cochin remained **Princely States** under British protection. The **Malabar Rebellion of 1921** was one of the most significant anti-colonial uprisings in Kerala, led by Mappila Muslims.\n\nA scroll whispers: Kerala's first printing press was brought by Christian missionaries in the colonial era — it played a major role in spreading literacy."},
+            {"keywords": ["independence","1947","1949","partition","india","freedom","join"],
+             "answer": "When India gained independence on **15 August 1947**, Travancore and Cochin initially hesitated to join. After political pressure, Travancore and Cochin merged into **Travancore-Cochin** on **1 July 1949**. Malabar was already part of Madras Province. All three merged into the **State of Kerala on 1 November 1956** when linguistic states were reorganised.\n\nA scroll whispers: Kerala Day (November 1st) celebrates the formation of the unified state — it is called **Kerala Piravi** meaning the Birth of Kerala."},
+            {"keywords": ["communist","1957","ems","namboodiripad","election","government","first","world"],
+             "answer": "In **1957**, Kerala made world history by electing the **world's first democratic communist government**, led by **E.M.S. Namboodiripad** (EMS). They passed radical land reform laws redistributing land to farmers. The Central Government controversially dismissed the ministry in 1959 under Article 356.\n\nA scroll whispers: EMS Namboodiripad was a Brahmin who gave up all caste privileges to fight for the poor — a remarkable personal sacrifice."},
+            {"keywords": ["literacy","education","development","kerala model","health","modern","achievement"],
+             "answer": "Modern Kerala is celebrated for the **Kerala Model of Development** — achieving near **100% literacy**, excellent healthcare, and low infant mortality despite modest income. This is attributed to centuries of royal patronage of education, Christian missionary schools, and strong social reform movements.\n\nA scroll whispers: Kerala sends more nurses, doctors, and engineers abroad than any other Indian state — remittances from the Gulf form a huge part of Kerala's economy today."},
         ]
     }
 }
@@ -176,9 +196,17 @@ RIDDLES = [
 def search(query, chapter_id):
     if chapter_id not in KNOWLEDGE: return None
     q = query.lower()
+    # normalise plurals/verb forms so "zamorins" matches "zamorin"
+    q = q.replace("zamorins","zamorin").replace("kingdoms","kingdom")          .replace("battles","battle").replace("kings","king")          .replace("rulers","ruler").replace("traders","trader")          .replace("ports","port").replace("wars","war")          .replace("soldiers","soldier").replace("commanders","commander")          .replace("artists","artist").replace("dances","dance")          .replace("temples","temple").replace("routes","route")          .replace("reforms","reform").replace("merchants","merchant")
     best, best_score = None, 0
     for pair in KNOWLEDGE[chapter_id]["qa"]:
-        score = sum(1 for kw in pair["keywords"] if kw in q)
+        # score = keyword matches + bonus if keyword is a substring
+        score = 0
+        for kw in pair["keywords"]:
+            if kw in q:
+                score += 2  # exact match worth more
+            elif any(kw in word or word in kw for word in q.split() if len(word) > 3):
+                score += 1  # partial match
         if score > best_score:
             best_score, best = score, pair["answer"]
     return best if best_score > 0 else None
@@ -671,6 +699,7 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
     <div class="inp-bar">
       <textarea id="msg-inp" placeholder="Ask Elarix about {{ chapter.title }}..." rows="1"
         onkeydown="onKey(event)" oninput="growInp(this)"></textarea>
+      <button id="voice-btn" onclick="toggleVoice()" title="Toggle Elarix voice on/off" style="padding:.75rem .9rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:8px;color:rgba(201,168,76,.6);cursor:pointer;font-size:1.1rem;transition:all .3s;flex-shrink:0;" title="Toggle voice">🔊</button>
       <button id="send-btn" onclick="doSend()">Send</button>
     </div>
   </div>
@@ -688,6 +717,7 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
     <div class="bub-btn" onclick="popOne(this)">O</div>
   </div>
   <div class="bub-score" id="bub-score">0 / 5 popped</div>
+  <button onclick="forceExitBubbles()" style="margin-top:1rem;padding:.5rem 1.5rem;background:transparent;border:1px solid rgba(201,168,76,.3);color:rgba(201,168,76,.5);font-family:Cinzel,serif;font-size:.65rem;letter-spacing:2px;cursor:pointer;border-radius:4px;">EXIT PUNISHMENT</button>
 </div>
 
 <!-- QUIZ MODAL -->
@@ -850,6 +880,76 @@ function doSend() {
   });
 }
 
+// ── VOICE SYSTEM ─────────────────────────────────────────────
+var voiceOn = true;
+var elarixVoice = null;
+
+function loadVoice() {
+  var voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return;
+  // Priority: female English voices
+  var preferred = [
+    "Google UK English Female",
+    "Microsoft Hazel - English (United Kingdom)",
+    "Microsoft Zira - English (United States)",
+    "Samantha",
+    "Karen",
+    "Moira",
+    "Tessa",
+    "Victoria",
+  ];
+  for (var i = 0; i < preferred.length; i++) {
+    var v = voices.find(function(v){ return v.name === preferred[i]; });
+    if (v) { elarixVoice = v; break; }
+  }
+  // Fallback: any female-sounding en-GB voice
+  if (!elarixVoice) {
+    elarixVoice = voices.find(function(v){
+      return v.lang === 'en-GB' && (v.name.toLowerCase().includes('female') || 
+             v.name.includes('Hazel') || v.name.includes('Susan'));
+    });
+  }
+  // Fallback: any en-GB voice
+  if (!elarixVoice) {
+    elarixVoice = voices.find(function(v){ return v.lang === 'en-GB'; });
+  }
+  // Fallback: any English voice
+  if (!elarixVoice) {
+    elarixVoice = voices.find(function(v){ return v.lang.startsWith('en'); });
+  }
+}
+
+window.speechSynthesis.onvoiceschanged = loadVoice;
+loadVoice();
+
+function toggleVoice() {
+  voiceOn = !voiceOn;
+  var btn = document.getElementById('voice-btn');
+  btn.textContent = voiceOn ? '🔊' : '🔇';
+  btn.style.color = voiceOn ? 'rgba(201,168,76,.9)' : 'rgba(201,168,76,.4)';
+  btn.style.borderColor = voiceOn ? 'rgba(201,168,76,.6)' : 'rgba(201,168,76,.2)';
+  if (!voiceOn) window.speechSynthesis.cancel();
+}
+
+function speakText(text) {
+  if (!voiceOn || !window.speechSynthesis) return;
+  // Strip markdown formatting for cleaner speech
+  var clean = text
+    .replace(/[*][*]([^*]+)[*][*]/g, '$1')
+    .replace(/[*]([^*]+)[*]/g, '$1')
+    .replace(/A scroll whispers:[\s\S]*$/, '')
+    .replace(/\n+/g, '. ')
+    .trim();
+  if (!clean) return;
+  window.speechSynthesis.cancel(); // stop any current speech
+  var utt = new SpeechSynthesisUtterance(clean);
+  if (elarixVoice) utt.voice = elarixVoice;
+  utt.pitch = 1.1;    // slightly higher = female, wise
+  utt.rate = 0.88;    // slightly slower = dramatic
+  utt.volume = 1.0;
+  window.speechSynthesis.speak(utt);
+}
+
 function addMsg(role, text) {
   var list = document.getElementById('msg-list');
   var row = document.createElement('div');
@@ -862,6 +962,7 @@ function addMsg(role, text) {
     '<div class="msg-bub"><div class="msg-txt">' + fmtText(text) + '</div></div></div>';
   list.appendChild(row);
   list.scrollTop = list.scrollHeight;
+  if (role === 'bot') speakText(text);
 }
 
 function fmtText(t) {
@@ -895,9 +996,12 @@ function clearMsgs() {
 }
 
 function showBubbles() {
+  // reset all bubbles visually
   document.querySelectorAll('.bub-btn').forEach(function(b){
     b.classList.remove('popped');
     b.textContent = 'O';
+    b.style.opacity = '1';
+    b.style.pointerEvents = 'auto';
   });
   document.getElementById('bub-score').textContent = '0 / 5 popped';
   document.getElementById('bub-ov').classList.add('show');
@@ -906,20 +1010,44 @@ function showBubbles() {
 function popOne(btn) {
   if (btn.classList.contains('popped')) return;
   btn.classList.add('popped');
-  btn.textContent = 'x';
-  fetch('/api/bubble', {method:'POST', headers:{'Content-Type':'application/json'}})
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    document.getElementById('bub-score').textContent = d.score + ' / 5 popped';
-    if (d.done) {
-      setTimeout(function(){
-        document.getElementById('bub-ov').classList.remove('show');
-        setMascot('happy', 'Freedom at last!');
-        addMsg('bot', d.message);
-      }, 700);
-    }
+  btn.textContent = '✦';
+  btn.style.opacity = '0.4';
+  btn.style.pointerEvents = 'none';
+
+  // Count popped bubbles purely on frontend — no server needed
+  var popped = document.querySelectorAll('.bub-btn.popped').length;
+  document.getElementById('bub-score').textContent = popped + ' / 5 popped';
+
+  if (popped >= 5) {
+    // Tell server to clear bubble_mode, then close overlay
+    setTimeout(function(){
+      fetch('/api/bubble/reset', {method:'POST', headers:{'Content-Type':'application/json'}})
+        .catch(function(){}) // ignore errors, close anyway
+        .finally(function(){
+          closeBubbles("*Elarix watches the last bubble pop with a satisfied nod.*\n\n**Very well.** You have served your punishment. The archives are open to you again. Choose your words more carefully this time!");
+        });
+    }, 500);
+  }
+}
+
+function closeBubbles(msg) {
+  document.getElementById('bub-ov').classList.remove('show');
+  busy = false;
+  setMascot('happy', 'Freedom at last!');
+  if (msg) addMsg('bot', msg);
+}
+
+function forceExitBubbles() {
+  fetch('/api/bubble/reset', {method:'POST', headers:{'Content-Type':'application/json'}})
+  .then(function(){
+    closeBubbles("*Elarix sighs and waves you through.*\n\nVery well. The punishment is lifted. Don't make me regret this.");
+  })
+  .catch(function(){
+    closeBubbles('');
   });
 }
+
+
 
 function startQuiz() {
   fetch('/api/quiz/start', {
@@ -1151,6 +1279,15 @@ def chapters():
 def chat(chapter_id):
     if "username" not in session: return redirect(url_for("index"))
     if chapter_id not in KNOWLEDGE: return redirect(url_for("chapters"))
+    # Always reset bubble/dungeon on page load — prevents getting permanently stuck
+    session["bubble_mode"] = False
+    session["bubble_score"] = 0
+    session["dungeon"] = False
+    session["dungeon_until"] = 0
+    session["riddle"] = None
+    session["anger"] = 0
+    session["irrelevant"] = 0
+    session.modified = True
     return render_template_string(CHAT_HTML, chapter_id=chapter_id,
         chapter=KNOWLEDGE[chapter_id], username=session["username"])
 
@@ -1267,6 +1404,17 @@ def api_chat():
             "Why thank you, **" + name + "**! *Elarix does a small undignified victory shuffle.* You have made this old archivist very happy indeed!",
         ])})
 
+    # INAPPROPRIATE / WEIRD QUESTIONS — respond in character instead of glitching
+    INAPPROPRIATE = ["femboy","nsfw","sexy","naked","nude","porn","sex","hot girl","hot guy",
+                     "girlfriend","boyfriend","kiss me","marry me","are you hot","are you cute",
+                     "do you like me","flirt","hookup","naughty","dirty","inappropriate"]
+    if any(w in lo for w in INAPPROPRIATE):
+        return jsonify({"type":"answer","message":random.choice([
+            "*Elarix slams his scroll shut and stares at you over his spectacles.*\n\n**Absolutely not.** I am an 847-year-old archivist, not an entertainment device. Ask me about Kerala history or I shall note this in the disciplinary scrolls.",
+            "*Elarix raises both eyebrows so high they disappear into his hood.*\n\nSeeker, I have been alive since the **Chera Dynasty**. I have NO time for this nonsense. Shall we return to the chronicles?",
+            "*Elarix coughs disapprovingly and adjusts his robes.*\n\nI did not guard these scrolls for **847 years** to answer THAT. Ask something worthy of the archives.",
+        ])})
+
     # MILD INSULTS
     if any(w in lo for w in ["you are dumb","you are stupid","you are useless","you suck","shut up","you are boring","ur dumb","ur stupid","ur useless","ur boring"]):
         return jsonify({"type":"answer","message":random.choice([
@@ -1291,7 +1439,9 @@ def api_chat():
     # LOCAL KNOWLEDGE
     answer = search(message, chapter)
     if answer:
-        session["irrelevant"] = 0; session.modified = True
+        session["irrelevant"] = 0
+        session["anger"] = 0  # reset anger on good messages so dungeon doesn't appear randomly
+        session.modified = True
         return jsonify({"type":"answer","message":answer})
 
     # GOOGLE / WIKIPEDIA FOR HISTORY QUESTIONS
@@ -1328,6 +1478,43 @@ def api_chat():
         session.modified = True
         return jsonify({"type":"bubble",
             "message":"*Elarix SLAMS the great tome shut!*\n\n**ENOUGH of this nonsense!** You have wasted the archivist's time with irrelevant babble three times!\n\nAs punishment — pop **5 enchanted bubbles** before you may speak again!"})
+
+@app.route("/api/bubble", methods=["POST"])
+def api_bubble():
+    if "username" not in session: return jsonify({"error":"Not logged in"}), 401
+    session["bubble_score"] = session.get("bubble_score", 0) + 1
+    session.modified = True
+    score = session["bubble_score"]
+    if score >= 5:
+        session["bubble_mode"] = False
+        session["bubble_score"] = 0
+        session["anger"] = 0
+        session["irrelevant"] = 0
+        session.modified = True
+        return jsonify({"score": 5, "done": True,
+            "message": "*Elarix watches the last bubble pop with a satisfied nod.*\n\n**Very well.** You have served your punishment. The archives are open to you again, **" + session["username"] + "**. Choose your words more carefully this time."})
+    return jsonify({"score": score, "done": False})
+
+@app.route("/api/bubble/reset", methods=["POST"])
+def api_bubble_reset():
+    """Emergency reset — clears bubble mode from session"""
+    if "username" not in session: return jsonify({"ok": True})
+    session["bubble_mode"] = False
+    session["bubble_score"] = 0
+    session["irrelevant"] = 0
+    session["anger"] = 0
+    session.modified = True
+    return jsonify({"ok": True})
+
+@app.route("/api/session/state")
+def session_state():
+    """Returns current session state so JS can restore UI on page reload"""
+    if "username" not in session: return jsonify({"bubble_mode": False, "dungeon": False})
+    return jsonify({
+        "bubble_mode": session.get("bubble_mode", False),
+        "dungeon": session.get("dungeon", False),
+        "dungeon_until": session.get("dungeon_until", 0),
+    })
 
 @app.route("/api/quiz/start", methods=["POST"])
 def quiz_start():
