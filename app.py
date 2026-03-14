@@ -227,28 +227,23 @@ def google_search(query):
         req = urllib.request.Request(url, headers={"User-Agent": "ElarixBot/1.0"})
         with urllib.request.urlopen(req, timeout=6) as r:
             data = json.loads(r.read().decode())
-
         items = data.get("items", [])
-        if not items:
-            return None
-
-        # Build a response from the top 3 results
-        lines = []
+        if not items: return None
+        # Grab best snippet only — paraphrase style
+        best = None
         for item in items[:3]:
-            title   = item.get("title", "")
             snippet = item.get("snippet", "").replace("\n", " ").strip()
-            link    = item.get("link", "")
-            if title and snippet:
-                lines.append("**" + title + "**\n" + snippet + "\n*Source: " + link + "*")
-
-        if not lines:
-            return None
-
-        return ("*Elarix consults the wider world...*\n\n" +
-                "**Google Search Results:**\n\n" +
-                "\n\n---\n\n".join(lines) +
-                "\n\n*A scroll whispers: These results come from the open web — always verify with your teacher.*")
-    except Exception as e:
+            if snippet and len(snippet) > 60:
+                best = snippet
+                break
+        if not best: return None
+        # Strip any dates/metadata artifacts from snippet
+        import re as _re
+        best = _re.sub(r"\b\d{1,2} [A-Z][a-z]+ \d{4}\b", "", best).strip()
+        return ("*Elarix unrolls a fresh scroll and peers at it carefully...*\n\n" +
+                best +
+                "\n\n*A scroll whispers: Always verify important facts with your teacher.*")
+    except Exception:
         return None
 
 # Keep Wikipedia as backup if Google fails
@@ -279,7 +274,13 @@ def wikipedia_search(query):
         sentences = extract.replace("\n", " ").split(". ")
         summary = ". ".join(sentences[:3]).strip()
         if not summary.endswith("."): summary += "."
-        return "**From Wikipedia** — *" + title + "*\n\n" + summary + "\n\n*A scroll whispers: Always verify with your teacher.*"
+        INTROS = [
+            "*Elarix adjusts his spectacles and reads from a distant scroll...*\n\n",
+            "*Elarix strokes his beard thoughtfully...*\n\n",
+            "*Elarix pulls out a crumbling parchment from the shelf...*\n\n",
+        ]
+        intro = random.choice(INTROS)
+        return intro + summary + "\n\n*A scroll whispers: Always verify important facts with your teacher.*"
     except Exception:
         return None
 
