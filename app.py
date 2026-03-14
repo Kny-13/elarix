@@ -1444,17 +1444,46 @@ def api_chat():
         session.modified = True
         return jsonify({"type":"answer","message":answer})
 
-    # GOOGLE / WIKIPEDIA FOR HISTORY QUESTIONS
-    HISTORY_KEYWORDS = [
-        "who","what","when","where","why","how","tell me","explain",
-        "dynasty","king","queen","ruler","empire","war","battle","history",
-        "kerala","india","british","portuguese","dutch","chera","zamorin",
-        "trade","spice","temple","religion","culture","art","dance","martial",
-        "independence","colonial","revolution","ancient","medieval","century",
-        "year","period","era","time","event","place","person","leader","general"
+    # GOOGLE / WIKIPEDIA — only for KERALA-related history questions
+    # Must contain at least one Kerala/India-specific keyword to trigger web search
+    KERALA_KEYWORDS = [
+        "kerala","chera","zamorin","malabar","calicut","kozhikode","cochin","kochi",
+        "travancore","trivandrum","thiruvananthapuram","kannur","thrissur","palakkad",
+        "kalaripayattu","kalari","kathakali","mohiniyattam","theyyam","onam",
+        "kunjali","marakkar","marthanda","varma","namboodiripad","narayana guru",
+        "portuguese","dutch","vasco","gama","tipu","hyder","colachel","mysore",
+        "mappila","nair","namboothiri","ezhava","sambhavar",
+        "spice","pepper","cardamom","cinnamon","musiri","beypore",
+        "padmanabha","temple entry","vaikom","satyagraha",
+        "chola","pandya","sangam","perumal","kulasekhara",
+        "malabar rebellion","1921","1741","1498","1957","1947","1936",
+        "indian history","south india","south indian","kerala history",
+        "medieval india","ancient india","colonial india"
     ]
-    is_history = any(kw in lo for kw in HISTORY_KEYWORDS)
-    if is_history:
+    GENERAL_HISTORY = [
+        "dynasty","kingdom","empire","battle","war","ruler","king","queen",
+        "trade","merchant","port","colonial","independence","revolution",
+        "ancient","medieval","century","history","culture","religion","temple"
+    ]
+    # Blocklist — topics that are clearly NOT Kerala history
+    NON_KERALA = [
+        "sumerian","mesopotamia","babylon","egypt","egyptian","greek","rome","roman",
+        "china","chinese","japan","japanese","europe","european","america","american",
+        "africa","african","viking","mongol","ottoman","aztec","inca","mayan",
+        "alexander","cleopatra","napoleon","caesar","hitler","world war",
+        "dinosaur","planet","space","solar system","universe","science","math",
+        "physics","chemistry","biology","computer","programming","football","cricket",
+        "bollywood","hollywood","movie","song","music","celebrity","instagram","tiktok",
+        "minecraft","roblox","fortnite","gaming","anime","manga","kpop",
+        "pakistan","bangladesh","sri lanka","nepal","myanmar","iran","iraq","syria",
+        "france","germany","spain","italy","england","usa","australia","canada",
+    ]
+    is_non_kerala = any(kw in lo for kw in NON_KERALA)
+    has_kerala = any(kw in lo for kw in KERALA_KEYWORDS)
+    has_general = any(kw in lo for kw in GENERAL_HISTORY)
+    # Only search web if Kerala-related AND not clearly about another region/topic
+    is_kerala_question = (has_kerala or (has_general and any(w in lo for w in ["india","indian","south","kerala"]))) and not is_non_kerala
+    if is_kerala_question:
         wiki = google_search(message) or wikipedia_search(message)
         if wiki:
             session["irrelevant"] = 0; session.modified = True
