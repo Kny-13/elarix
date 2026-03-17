@@ -1450,7 +1450,7 @@ def api_chat():
 
     # HOBBIES
     if any(w in lo for w in ["hobby","hobbies","free time","pastime","what do you enjoy","ur hobbies","ur hobby","do for fun","do you do for fun"]):
-        return jsonify({"type":"answer","message":random.choice([
+        return jsonify({"type":"answer","message":random.choice)[
             "*Elarix leans back in her ancient chair with delight.*\n\nAh, my hobbies! I enjoy:\n\n**1.** Reading ancient scrolls (obviously)\n**2.** Cataloguing spice trade routes\n**3.** Arguing with historians who get Kerala history wrong\n**4.** Feeding my pet crow, Kali\n**5.** Occasionally locking rude visitors in the dungeon\n\nSimple pleasures for a simple archivist!"})
            
 
