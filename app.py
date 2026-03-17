@@ -283,7 +283,8 @@ def wikipedia_search(query):
         return intro + summary + "\n\n*A scroll whispers: Always verify important facts with your teacher.*"
     except Exception:
         return None
-      # ── STATIC FILES (music etc) ─────────────────────────────────
+
+# ── STATIC FILES (music etc) ─────────────────────────────────
 from flask import send_from_directory
 @app.route("/static/<path:filename>")
 def static_files(filename):
@@ -305,6 +306,14 @@ def mascot_img(expr):
         for candidate in candidates:
             if os.path.exists(os.path.join(folder, candidate)):
                 return send_from_directory(folder, candidate)
+    return "", 404
+
+@app.route("/music")
+def serve_music():
+    folder = os.path.dirname(os.path.abspath(__file__))
+    for candidate in ["tunetank-medieval-happy-music-412790.mp3"]:
+        if os.path.exists(os.path.join(folder, candidate)):
+            return send_from_directory(folder, candidate)
     return "", 404
 
 @app.route("/mascot-debug")
@@ -562,6 +571,10 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
 .sb-facts li{font-size:.8rem;color:rgba(245,230,200,.6);padding:.4rem 0;border-bottom:1px solid rgba(201,168,76,.05);display:flex;gap:.45rem;line-height:1.55;}
 .sb-facts li::before{content:'-';color:var(--gold);opacity:.45;flex-shrink:0;}
 .mascot-area{padding:1.2rem;text-align:center;border-bottom:1px solid rgba(201,168,76,.08);}
+#music-bar{position:fixed;bottom:1rem;right:1rem;z-index:200;display:flex;align-items:center;gap:.5rem;background:rgba(10,3,6,.85);border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:.4rem .8rem;backdrop-filter:blur(8px);}
+#music-btn{background:none;border:none;color:rgba(201,168,76,.7);cursor:pointer;font-size:1rem;padding:0;line-height:1;}
+#music-label{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:1.5px;color:rgba(201,168,76,.4);text-transform:uppercase;}
+#music-vol{width:60px;accent-color:#C9A84C;cursor:pointer;opacity:0.6;}
 #mascot-img{width:170px;border-radius:8px;transition:opacity .2s ease,transform .2s ease;filter:drop-shadow(0 0 12px rgba(201,168,76,.3));}
 #mascot-cap{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:rgba(201,168,76,.5);margin-top:.6rem;text-transform:uppercase;display:block;transition:opacity .15s ease;}
 .mascot-emoji{width:170px;height:170px;font-size:5rem;display:none;align-items:center;justify-content:center;border-radius:8px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);margin:0 auto;transition:all .3s ease;}
@@ -647,10 +660,12 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
 .quiz-fin-icon{font-size:3rem;margin-bottom:1rem;}
 .quiz-fin-txt{font-size:1rem;line-height:1.75;color:rgba(245,230,200,.82);}
 </style></head><body>
+
 <!-- BACKGROUND MUSIC — put your MP3 file in a folder called "static" next to app.py -->
 <audio id="bg-music" loop autoplay style="display:none">
   <source src="/static/music.mp3" type="audio/mpeg">
 </audio>
+
 <div class="bg"></div>
 
 <div class="topbar">
@@ -676,12 +691,17 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
         {% for f in chapter.key_facts %}<li>{{ f }}</li>{% endfor %}
       </ul>
     </div>
-      <!-- BACKGROUND MUSIC -->
+    <!-- BACKGROUND MUSIC -->
     <div id="music-bar">
       <button id="music-btn" onclick="toggleMusic()" title="Toggle music">🎵</button>
       <span id="music-label">Music</span>
       <input id="music-vol" type="range" min="0" max="1" step="0.05" value="0.18"
         oninput="bgAudio.volume=this.value" title="Volume">
+    </div>
+    <audio id="bg-audio" loop preload="auto">
+      <source src="/music" type="audio/mpeg">
+    </audio>
+
     <div class="mascot-area">
       <img id="mascot-img" src="/mascot/normal" alt="Elarix"
         onerror="this.style.display='none';document.getElementById('mascot-fallback').style.display='flex';">
@@ -718,6 +738,7 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
     <div class="inp-bar">
       <textarea id="msg-inp" placeholder="Ask Elarix about {{ chapter.title }}..." rows="1"
         onkeydown="onKey(event)" oninput="growInp(this)"></textarea>
+      <button id="music-btn" onclick="toggleMusic()" title="Toggle background music" style="padding:.75rem .9rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:8px;color:rgba(201,168,76,.6);cursor:pointer;font-size:1.1rem;transition:all .3s;flex-shrink:0;">🎵</button>
       <button id="voice-btn" onclick="toggleVoice()" title="Toggle Elarix voice on/off" style="padding:.75rem .9rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:8px;color:rgba(201,168,76,.6);cursor:pointer;font-size:1.1rem;transition:all .3s;flex-shrink:0;" title="Toggle voice">🔊</button>
       <button id="send-btn" onclick="doSend()">Send</button>
     </div>
@@ -898,7 +919,8 @@ function doSend() {
     document.getElementById('send-btn').disabled = false;
   });
 }
-MUSIC SYSTEM ─────────────────────────────────────────────
+
+// ── MUSIC SYSTEM ─────────────────────────────────────────────
 var bgAudio = document.getElementById('bg-audio');
 var musicOn = false;
 
@@ -1432,7 +1454,10 @@ def api_chat():
     ) or lo in ["good day","whats up","what's up","good morning","good evening","good afternoon"]
     if is_greeting:
         return jsonify({"type":"answer","message":random.choice([
-            "Ah, **" + name + "**! *Elarix looks up from her crumbling parchment.* Welcome back to the archives! What Kerala wisdom do you seek today?" ])})
+            "Ah, **" + name + "**! *Elarix looks up from his crumbling parchment.* Welcome back to the archives! What Kerala wisdom do you seek today?",
+            "Well met, **" + name + "**! The candles are lit, the scrolls are open. Ask away, young scholar!",
+            "Greetings, **" + name + "**! *Elarix adjusts his spectacles and cracks his knuckles.* What would you like to learn about Kerala history?",
+        ])})
 
     # NAME
     if any(w in lo for w in ["your name","who are you","what are you","introduce yourself","what is your name","who r u","ur name","whos elarix","who is elarix"]):
@@ -1450,9 +1475,10 @@ def api_chat():
 
     # HOBBIES
     if any(w in lo for w in ["hobby","hobbies","free time","pastime","what do you enjoy","ur hobbies","ur hobby","do for fun","do you do for fun"]):
-        return jsonify({"type":"answer","message":random.choice)[
-            "*Elarix leans back in her ancient chair with delight.*\n\nAh, my hobbies! I enjoy:\n\n**1.** Reading ancient scrolls (obviously)\n**2.** Cataloguing spice trade routes\n**3.** Arguing with historians who get Kerala history wrong\n**4.** Feeding my pet crow, Kali\n**5.** Occasionally locking rude visitors in the dungeon\n\nSimple pleasures for a simple archivist!"})
-           
+        return jsonify({"type":"answer","message":random.choice([
+            "*Elarix leans back in his ancient chair with delight.*\n\nAh, my hobbies! I enjoy:\n\n**1.** Reading ancient scrolls (obviously)\n**2.** Cataloguing spice trade routes\n**3.** Arguing with historians who get Kerala history wrong\n**4.** Feeding my pet crow, Kali\n**5.** Occasionally locking rude visitors in the dungeon\n\nSimple pleasures for a simple archivist!",
+            "In my spare time I enjoy **writing new scrolls**, **sharpening my quill**, and **eavesdropping on merchants** to learn the latest trade gossip. I also recently took up **Kalaripayattu** — I am not very good at it. My back hurts.",
+        ])})
 
     # FAVOURITE SUBJECT
     if any(w in lo for w in ["favourite subject","favorite subject","fav subject","best subject","fav sub","ur subject","your subject"]):
@@ -1461,8 +1487,9 @@ def api_chat():
     # FAVOURITE FOOD
     if any(w in lo for w in ["favourite food","favorite food","fav food","what do you eat","ur food","your food"]):
         return jsonify({"type":"answer","message":random.choice([
-            "*Elarix pats her stomach fondly.*\n\nMy absolute favourite is **Kerala Sadya** — the grand feast served on a banana leaf. Rice, sambar, avial, payasam... magnificent.\n\nI also have a weakness for **black pepper chicken** — fitting, given that pepper built this entire civilisation! I avoid Portuguese food on principle.",
-            "Being an 847-year-old archivist, I have eaten at the tables of kings! My favourite is **fish curry with rice** — a Kerala staple. I once had dinner with the Zamorin himself. He had terrible table manners.])})
+            "*Elarix pats his stomach fondly.*\n\nMy absolute favourite is **Kerala Sadya** — the grand feast served on a banana leaf. Rice, sambar, avial, payasam... magnificent.\n\nI also have a weakness for **black pepper chicken** — fitting, given that pepper built this entire civilisation! I avoid Portuguese food on principle.",
+            "Being an 847-year-old archivist, I have eaten at the tables of kings! My favourite is **fish curry with rice** — a Kerala staple. I once had dinner with the Zamorin himself. He had terrible table manners.",
+        ])})
 
     # FAVOURITE COLOUR
     if any(w in lo for w in ["favourite colour","favorite colour","fav colour","favorite color","favourite color","fav color","what colour","what color","ur colour","ur color"]):
@@ -1471,37 +1498,49 @@ def api_chat():
     # HOW ARE YOU
     if any(w in lo for w in ["how are you","how r u","are you okay","how are u","u ok","you alright","hows it going","how you doing","how r u doing"]):
         return jsonify({"type":"answer","message":random.choice([
-       "I am **deeply well**, **" + name + "**! Though slightly grumpy — someone asked me what Minecraft is yesterday. I sent them to the dungeon."
+            "*Elarix dramatically places hand on chest.*\n\nI am **magnificent**, thank you for asking, **" + name + "**! The scrolls are organised, the candles are lit, and no one has been rude enough for the dungeon today. A splendid day!",
+            "Honestly? My back aches from 847 years of hunching over scrolls, and my crow Kali ate three of my best parchments this morning.\n\nBut seeing a scholar like **" + name + "** eager to learn Kerala history? *That* makes it all worthwhile.",
+            "I am **deeply well**, **" + name + "**! Though slightly grumpy — someone asked me what Minecraft is yesterday. I sent them to the dungeon.",
         ])})
 
     # COMPLIMENTS
     if any(w in lo for w in ["good job","well done","great job","amazing","awesome","you rock","you are great","ur great","love you","you are the best","ur the best"]):
         return jsonify({"type":"answer","message":random.choice([
-            "*Elarix blushes beneath her anceint parchment.*\n\nOh my... **" + name + "**, you are too kind! 847 years and this is still the best part of the job. Now — shall we celebrate with some Kerala history?" ])})
+            "*Elarix blushes beneath his ancient beard.*\n\nOh my... **" + name + "**, you are too kind! 847 years and this is still the best part of the job. Now — shall we celebrate with some Kerala history?",
+            "Why thank you, **" + name + "**! *Elarix does a small undignified victory shuffle.* You have made this old archivist very happy indeed!",
+        ])})
 
     # INAPPROPRIATE / WEIRD QUESTIONS — respond in character instead of glitching
     INAPPROPRIATE = ["femboy","nsfw","sexy","naked","nude","porn","sex","hot girl","hot guy",
                      "girlfriend","boyfriend","kiss me","marry me","are you hot","are you cute",
-             "do you like me","flirt","hookup","naughty","dirty","inappropriate"]
+                     "do you like me","flirt","hookup","naughty","dirty","inappropriate"]
     if any(w in lo for w in INAPPROPRIATE):
         return jsonify({"type":"answer","message":random.choice([
-            "*Elarix slams her scroll shut and stares at you over her spectacles.*\n\n**Absolutely not.** I am an 847-year-old archivist, not an entertainment device. Ask me about Kerala history or I shall note this in the disciplinary scrolls."])})
+            "*Elarix slams his scroll shut and stares at you over his spectacles.*\n\n**Absolutely not.** I am an 847-year-old archivist, not an entertainment device. Ask me about Kerala history or I shall note this in the disciplinary scrolls.",
+            "*Elarix raises both eyebrows so high they disappear into his hood.*\n\nSeeker, I have been alive since the **Chera Dynasty**. I have NO time for this nonsense. Shall we return to the chronicles?",
+            "*Elarix coughs disapprovingly and adjusts his robes.*\n\nI did not guard these scrolls for **847 years** to answer THAT. Ask something worthy of the archives.",
+        ])})
 
     # MILD INSULTS
     if any(w in lo for w in ["you are dumb","you are stupid","you are useless","you suck","shut up","you are boring","ur dumb","ur stupid","ur useless","ur boring"]):
         return jsonify({"type":"answer","message":random.choice([
-            "*Elarix raises one eyebrow slowly.*\n\nI have survived the fall of the Chera Dynasty, three invasions, and 847 years of difficult students, **" + name + "**.\n\nYour words wound me not. The dungeon, however, is always available."])})
+            "*Elarix raises one very long eyebrow slowly.*\n\nI have survived the fall of the Chera Dynasty, three invasions, and 847 years of difficult students, **" + name + "**.\n\nYour words wound me not. The dungeon, however, is always available.",
+            "Dumb? **DUMB?!** I have memorised every Kerala king since 800 CE! *Elarix huffs and straightens his robes.* I shall let that pass. **This time.**",
+        ])})
 
     # THANKS
     if len(lo) < 20 and any(w in lo for w in ["thank you","thanks","thx","ty","thank u","cheers","thankyou"]):
         return jsonify({"type":"answer","message":random.choice([
-            "*Elarix bows with a gracious sweep of her sari.*\n\nYou are most welcome, **" + name + "**! It is my honour to share the chronicles of Kerala. Come back anytime — the archives never close!",
-           
+            "*Elarix bows with a gracious sweep of his robes.*\n\nYou are most welcome, **" + name + "**! It is my honour to share the chronicles of Kerala. Come back anytime — the archives never close!",
+            "Think nothing of it, **" + name + "**! Sharing Kerala's history is what I live for — literally, for 847 years. Now go forth and impress your teachers!",
+        ])})
 
     # BYE
     if len(lo) < 25 and any(w in lo for w in ["bye","goodbye","see you","cya","take care","farewell","good night","goodnight","gtg","got to go","gotta go"]):
         return jsonify({"type":"answer","message":random.choice([
-          "Goodbye, **" + name + "**! *Elarix waves dramatically with her quill, spattering ink everywhere.* Safe travels, young scholar. Kali says goodbye too!")})
+            "*Elarix stands and bows deeply.*\n\nFarewell, **" + name + "**! May the wisdom of Kerala's ancient kings guide your path. The archives will be here when you return!",
+            "Goodbye, **" + name + "**! *Elarix waves dramatically with his quill, spattering ink everywhere.* Safe travels, young scholar. Kali says goodbye too!",
+        ])})
 
     # LOCAL KNOWLEDGE
     answer = search(message, chapter)
