@@ -214,6 +214,7 @@ def search(query, chapter_id):
 
 # ── GOOGLE SEARCH ────────────────────────────────────────────
 GOOGLE_API_KEY = "AIzaSyDjNTj9mv-ipysplztpuAkY3Fk9RQ0wyl401"
+SARVAM_API_KEY = "sk_lox1xi4h_rKRCO8uwOiwulWuaQS96gdTD"  # Sarvam TTS
 GOOGLE_CX      = "443561326e11e4c6e"
 
 def google_search(query):
@@ -868,6 +869,7 @@ function doSend() {
   var inp = document.getElementById('msg-inp');
   var txt = inp.value.trim();
   if (!txt || busy) return;
+  playClick('send');
   addMsg('user', txt);
   inp.value = '';
   inp.style.height = 'auto';
@@ -890,6 +892,7 @@ function doSend() {
       setMascot('angry', 'Watch your tongue!');
       addMsg('bot', d.message);
     } else if (d.type === 'dungeon_start') {
+      playClick('dungeon');
       setMascot('shocked', 'To the dungeon!');
       addMsg('bot', d.message);
     } else if (d.type === 'dungeon') {
@@ -918,6 +921,78 @@ function doSend() {
     busy = false;
     document.getElementById('send-btn').disabled = false;
   });
+}
+
+// ── CLICK SOUNDS (Web Audio API — no file needed) ────────────
+var audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playClick(type) {
+  try {
+    var ctx = getAudioCtx();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    if (type === 'send') {
+      // Satisfying "whoosh" send sound
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'bubble') {
+      // Fun pop sound
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.1);
+    } else if (type === 'correct') {
+      // Happy chime for correct quiz answer
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523, ctx.currentTime);
+      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+      osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.35);
+    } else if (type === 'wrong') {
+      // Dull thud for wrong answer
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(200, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'dungeon') {
+      // Ominous low tone for dungeon
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(120, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.4);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.4);
+    } else {
+      // Default soft click
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.08);
+    }
+  } catch(e) {}
 }
 
 // ── MUSIC SYSTEM ─────────────────────────────────────────────
@@ -951,6 +1026,78 @@ document.addEventListener('click', function startOnClick() {
   document.removeEventListener('click', startOnClick);
 }, {once: true});
 
+// ── CLICK SOUNDS (Web Audio API — no file needed) ────────────
+var audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playClick(type) {
+  try {
+    var ctx = getAudioCtx();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    if (type === 'send') {
+      // Satisfying "whoosh" send sound
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'bubble') {
+      // Fun pop sound
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.1);
+    } else if (type === 'correct') {
+      // Happy chime for correct quiz answer
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523, ctx.currentTime);
+      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+      osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.35);
+    } else if (type === 'wrong') {
+      // Dull thud for wrong answer
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(200, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'dungeon') {
+      // Ominous low tone for dungeon
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(120, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.4);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.4);
+    } else {
+      // Default soft click
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.08);
+    }
+  } catch(e) {}
+}
+
 // ── MUSIC SYSTEM ─────────────────────────────────────────────
 var musicOn = true;
 var bgMusic = document.getElementById('bg-music');
@@ -971,6 +1118,12 @@ function toggleMusic() {
   }
 }
 
+// Add click sounds to all topbar buttons
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('button, .topbtn, .tb-back, .bub-btn, .chapter-card');
+  if (btn && !btn.id === 'send-btn') playClick('click');
+});
+
 // Set volume low so it doesn't overpower voice
 window.addEventListener('load', function(){
   bgMusic = document.getElementById('bg-music');
@@ -986,47 +1139,63 @@ window.addEventListener('load', function(){
   }
 });
 
-// ── VOICE SYSTEM ─────────────────────────────────────────────
-var voiceOn = true;
-var elarixVoice = null;
-
-function loadVoice() {
-  var voices = window.speechSynthesis.getVoices();
-  if (!voices.length) return;
-  // Priority: female English voices
-  var preferred = [
-    "Google UK English Female",
-    "Microsoft Hazel - English (United Kingdom)",
-    "Microsoft Zira - English (United States)",
-    "Samantha",
-    "Karen",
-    "Moira",
-    "Tessa",
-    "Victoria",
-  ];
-  for (var i = 0; i < preferred.length; i++) {
-    var v = voices.find(function(v){ return v.name === preferred[i]; });
-    if (v) { elarixVoice = v; break; }
-  }
-  // Fallback: any female-sounding en-GB voice
-  if (!elarixVoice) {
-    elarixVoice = voices.find(function(v){
-      return v.lang === 'en-GB' && (v.name.toLowerCase().includes('female') || 
-             v.name.includes('Hazel') || v.name.includes('Susan'));
-    });
-  }
-  // Fallback: any en-GB voice
-  if (!elarixVoice) {
-    elarixVoice = voices.find(function(v){ return v.lang === 'en-GB'; });
-  }
-  // Fallback: any English voice
-  if (!elarixVoice) {
-    elarixVoice = voices.find(function(v){ return v.lang.startsWith('en'); });
-  }
+// ── CLICK SOUND ──────────────────────────────────────────────
+var audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
 }
 
-window.speechSynthesis.onvoiceschanged = loadVoice;
-loadVoice();
+function playClick(type) {
+  try {
+    var ctx = getAudioCtx();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    if (type === 'send') {
+      // Satisfying "whoosh" send sound
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'pop') {
+      // Bubble pop sound
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.12);
+    } else if (type === 'quiz') {
+      // Quiz correct ding
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523, ctx.currentTime);
+      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+      osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.35);
+    } else {
+      // Default click
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.08);
+    }
+  } catch(e) {}
+}
+
+// ── VOICE SYSTEM (Sarvam AI TTS) ─────────────────────────────
+var voiceOn = true;
+var currentAudio = null;
 
 function toggleVoice() {
   voiceOn = !voiceOn;
@@ -1034,26 +1203,35 @@ function toggleVoice() {
   btn.textContent = voiceOn ? '🔊' : '🔇';
   btn.style.color = voiceOn ? 'rgba(201,168,76,.9)' : 'rgba(201,168,76,.4)';
   btn.style.borderColor = voiceOn ? 'rgba(201,168,76,.6)' : 'rgba(201,168,76,.2)';
-  if (!voiceOn) window.speechSynthesis.cancel();
+  if (!voiceOn && currentAudio) { currentAudio.pause(); currentAudio = null; }
 }
 
 function speakText(text) {
-  if (!voiceOn || !window.speechSynthesis) return;
-  // Strip markdown formatting for cleaner speech
-  var clean = text
-    .replace(/[*][*]([^*]+)[*][*]/g, '$1')
-    .replace(/[*]([^*]+)[*]/g, '$1')
-    .replace(/A scroll whispers:[\s\S]*$/, '')
-    .replace(/\n+/g, '. ')
-    .trim();
-  if (!clean) return;
-  window.speechSynthesis.cancel(); // stop any current speech
-  var utt = new SpeechSynthesisUtterance(clean);
-  if (elarixVoice) utt.voice = elarixVoice;
-  utt.pitch = 1.1;    // slightly higher = female, wise
-  utt.rate = 0.88;    // slightly slower = dramatic
-  utt.volume = 1.0;
-  window.speechSynthesis.speak(utt);
+  if (!voiceOn) return;
+  // Stop any current speech
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  fetch('/api/tts', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({text: text})
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d.audio || !voiceOn) return;
+    // Play base64 mp3 returned by Sarvam
+    var audio = new Audio('data:audio/mp3;base64,' + d.audio);
+    audio.volume = 1.0;
+    currentAudio = audio;
+    audio.play().catch(function(){});
+  })
+  .catch(function(){
+    // Sarvam failed — fall back to browser TTS silently
+    if (!voiceOn || !window.speechSynthesis) return;
+    var clean = text.replace(/\*\*?([^*]+)\*\*?/g,'$1').replace(/\n/g,'. ').trim();
+    var utt = new SpeechSynthesisUtterance(clean);
+    utt.rate = 0.88; utt.pitch = 1.1;
+    window.speechSynthesis.speak(utt);
+  });
 }
 
 function addMsg(role, text) {
@@ -1115,6 +1293,7 @@ function showBubbles() {
 
 function popOne(btn) {
   if (btn.classList.contains('popped')) return;
+  playClick('pop');
   btn.classList.add('popped');
   btn.textContent = '✦';
   btn.style.opacity = '0.4';
@@ -1202,6 +1381,7 @@ function setQ(q, hint, idx, total) {
 function checkAnswer() {
   var ans = document.getElementById('q-inp').value.trim();
   if (!ans) { document.getElementById('q-inp').focus(); return; }
+  playClick('quiz');
   var btn = document.querySelector('#q-area .qbtn-main');
   if (btn) btn.disabled = true;
   fetch('/api/quiz', {
@@ -1214,6 +1394,7 @@ function checkAnswer() {
     if (btn) btn.disabled = false;
     document.getElementById('q-area').style.display = 'none';
     document.getElementById('q-res').style.display = 'block';
+    playClick(d.correct ? 'correct' : 'wrong');
     var rb = document.getElementById('q-res-box');
     rb.className = 'quiz-res ' + (d.correct ? 'res-ok' : 'res-bad');
     rb.textContent = d.correct
@@ -1629,6 +1810,43 @@ def api_bubble():
         return jsonify({"score": 5, "done": True,
             "message": "*Elarix watches the last bubble pop with a satisfied nod.*\n\n**Very well.** You have served your punishment. The archives are open to you again, **" + session["username"] + "**. Choose your words more carefully this time."})
     return jsonify({"score": score, "done": False})
+
+@app.route("/api/tts", methods=["POST"])
+def api_tts():
+    """Convert text to speech using Sarvam AI and return base64 audio"""
+    if "username" not in session: return jsonify({"error": "Not logged in"}), 401
+    d = request.get_json()
+    text = d.get("text", "").strip()
+    if not text: return jsonify({"error": "No text"}), 400
+    # Strip markdown for cleaner speech
+    import re
+    clean = re.sub(r"\*\*([^*]+)\*\*", r"", text)
+    clean = re.sub(r"\*([^*]+)\*", r"", clean)
+    clean = re.sub(r"A scroll whispers:.*$", "", clean, flags=re.DOTALL).strip()
+    clean = clean.replace("\n", " ").strip()
+    if len(clean) > 500: clean = clean[:500]  # Sarvam limit safety
+    try:
+        tts_url = "https://api.sarvam.ai/text-to-speech"
+        payload = json.dumps({
+            "inputs": [clean],
+            "target_language_code": "en-IN",
+            "speaker": "anushka",  # female English Indian voice
+            "model": "bulbul:v2",
+            "pace": 0.9,
+            "loudness": 1.2,
+            "speech_sample_rate": 22050,
+            "enable_preprocessing": True,
+            "enc_format": "mp3"
+        }).encode("utf-8")
+
+
+        with urllib.request.urlopen(req, timeout=10) as r:
+            result = json.loads(r.read().decode())
+        audios = result.get("audios", [])
+        if not audios: return jsonify({"error": "No audio returned"}), 500
+        return jsonify({"audio": audios[0]})  # base64 mp3
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/api/bubble/reset", methods=["POST"])
 def api_bubble_reset():
