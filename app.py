@@ -214,7 +214,7 @@ def search(query, chapter_id):
 
 # ── GOOGLE SEARCH ────────────────────────────────────────────
 GOOGLE_API_KEY = "AIzaSyDjNTj9mv-ipysplztpuAkY3Fk9RQ0wyl401"
-SARVAM_API_KEY = "sk_lox1xi4h_rKRCO8uwOiwulWuaQS96gdTD"  # Sarvam TTS
+SARVAM_API_KEY = "sk_o39hv0e4_y6kJOhlbGBJXbwqK8B2krGWF"  # Sarvam TTS
 GOOGLE_CX      = "443561326e11e4c6e"
 
 def google_search(query):
@@ -938,59 +938,47 @@ function playClick(type) {
     osc.connect(gain);
     gain.connect(ctx.destination);
     if (type === 'send') {
-      // Satisfying "whoosh" send sound
       osc.type = 'sine';
       osc.frequency.setValueAtTime(440, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
       gain.gain.setValueAtTime(0.15, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.15);
-    } else if (type === 'bubble') {
-      // Fun pop sound
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'pop' || type === 'bubble') {
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(600, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.12);
       gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.1);
-    } else if (type === 'correct') {
-      // Happy chime for correct quiz answer
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.12);
+    } else if (type === 'correct' || type === 'quiz') {
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(523, ctx.currentTime);
       osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
       osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
       gain.gain.setValueAtTime(0.15, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.35);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.35);
     } else if (type === 'wrong') {
-      // Dull thud for wrong answer
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(200, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.15);
       gain.gain.setValueAtTime(0.1, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.15);
     } else if (type === 'dungeon') {
-      // Ominous low tone for dungeon
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(120, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.4);
       gain.gain.setValueAtTime(0.15, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.4);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.4);
     } else {
-      // Default soft click
       osc.type = 'sine';
       osc.frequency.setValueAtTime(300, ctx.currentTime);
       gain.gain.setValueAtTime(0.08, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.08);
+      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.08);
     }
   } catch(e) {}
 }
@@ -1001,12 +989,11 @@ var musicOn = false;
 
 function toggleMusic() {
   if (musicOn) {
-    bgAudio.pause();
-    musicOn = false;
+    bgAudio.pause(); musicOn = false;
     document.getElementById('music-btn').textContent = '🎵';
     document.getElementById('music-btn').style.opacity = '0.4';
   } else {
-    bgAudio.volume = document.getElementById('music-vol').value;
+    bgAudio.volume = parseFloat(document.getElementById('music-vol').value || 0.18);
     bgAudio.play().catch(function(){});
     musicOn = true;
     document.getElementById('music-btn').textContent = '🔈';
@@ -1017,181 +1004,13 @@ function toggleMusic() {
 // Auto-start music on first user interaction
 document.addEventListener('click', function startOnClick() {
   if (!musicOn) {
-    bgAudio.volume = parseFloat(document.getElementById('music-vol').value);
+    bgAudio.volume = parseFloat(document.getElementById('music-vol') ? document.getElementById('music-vol').value : 0.18);
     bgAudio.play().catch(function(){});
     musicOn = true;
     document.getElementById('music-btn').textContent = '🔈';
     document.getElementById('music-btn').style.opacity = '1';
   }
-  document.removeEventListener('click', startOnClick);
 }, {once: true});
-
-// ── CLICK SOUNDS (Web Audio API — no file needed) ────────────
-var audioCtx = null;
-function getAudioCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  return audioCtx;
-}
-
-function playClick(type) {
-  try {
-    var ctx = getAudioCtx();
-    var osc = ctx.createOscillator();
-    var gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    if (type === 'send') {
-      // Satisfying "whoosh" send sound
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.15);
-    } else if (type === 'bubble') {
-      // Fun pop sound
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(600, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.1);
-    } else if (type === 'correct') {
-      // Happy chime for correct quiz answer
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(523, ctx.currentTime);
-      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
-      osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.35);
-    } else if (type === 'wrong') {
-      // Dull thud for wrong answer
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(200, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.15);
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.15);
-    } else if (type === 'dungeon') {
-      // Ominous low tone for dungeon
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(120, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.4);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.4);
-    } else {
-      // Default soft click
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(300, ctx.currentTime);
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.08);
-    }
-  } catch(e) {}
-}
-
-// ── MUSIC SYSTEM ─────────────────────────────────────────────
-var musicOn = true;
-var bgMusic = document.getElementById('bg-music');
-
-function toggleMusic() {
-  musicOn = !musicOn;
-  var btn = document.getElementById('music-btn');
-  if (musicOn) {
-    bgMusic.play();
-    btn.textContent = '🎵';
-    btn.style.color = 'rgba(201,168,76,.9)';
-    btn.style.borderColor = 'rgba(201,168,76,.6)';
-  } else {
-    bgMusic.pause();
-    btn.textContent = '🔕';
-    btn.style.color = 'rgba(201,168,76,.4)';
-    btn.style.borderColor = 'rgba(201,168,76,.2)';
-  }
-}
-
-// Add click sounds to all topbar buttons
-document.addEventListener('click', function(e) {
-  var btn = e.target.closest('button, .topbtn, .tb-back, .bub-btn, .chapter-card');
-  if (btn && !btn.id === 'send-btn') playClick('click');
-});
-
-// Set volume low so it doesn't overpower voice
-window.addEventListener('load', function(){
-  bgMusic = document.getElementById('bg-music');
-  if (bgMusic) {
-    bgMusic.volume = 0.2;
-    bgMusic.play().catch(function(){
-      // Browser blocked autoplay — wait for first user click
-      document.addEventListener('click', function startMusic(){
-        bgMusic.play();
-        document.removeEventListener('click', startMusic);
-      });
-    });
-  }
-});
-
-// ── CLICK SOUND ──────────────────────────────────────────────
-var audioCtx = null;
-function getAudioCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  return audioCtx;
-}
-
-function playClick(type) {
-  try {
-    var ctx = getAudioCtx();
-    var osc = ctx.createOscillator();
-    var gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    if (type === 'send') {
-      // Satisfying "whoosh" send sound
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.15);
-    } else if (type === 'pop') {
-      // Bubble pop sound
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.12);
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.12);
-    } else if (type === 'quiz') {
-      // Quiz correct ding
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(523, ctx.currentTime);
-      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
-      osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.35);
-    } else {
-      // Default click
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(600, ctx.currentTime);
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.08);
-    }
-  } catch(e) {}
-}
 
 // ── VOICE SYSTEM (Sarvam AI TTS) ─────────────────────────────
 var voiceOn = true;
@@ -1838,8 +1657,24 @@ def api_tts():
             "enable_preprocessing": True,
             "enc_format": "mp3"
         }).encode("utf-8")
-
-
+        req = urllib.request.Request(
+            tts_url,
+            data=payload,
+            headers={
+                "Content-Type": "application/json",
+                "api-subscription-key": SARVAM_API_KEY
+            },
+            method="POST"
+        )
+        req = urllib.request.Request(
+            tts_url,
+            data=payload,
+            headers={
+                "Content-Type": "application/json",
+                "api-subscription-key": SARVAM_API_KEY
+            },
+            method="POST"
+        )
         with urllib.request.urlopen(req, timeout=10) as r:
             result = json.loads(r.read().decode())
         audios = result.get("audios", [])
