@@ -311,19 +311,53 @@ def mascot_img(expr):
 
 @app.route("/music")
 def serve_music():
-    folder = os.path.dirname(os.path.abspath(__file__))
-    for candidate in ["tunetank-medieval-happy-music-412790.mp3"]:
-        if os.path.exists(os.path.join(folder, candidate)):
-            return send_from_directory(folder, candidate)
+    # Look for music.mp3 first, then any mp3 in project folder or static/
+    script_folder = os.path.dirname(os.path.abspath(__file__))
+    static_folder = os.path.join(script_folder, "static")
+    search_folders = [script_folder, static_folder]
+    for folder in search_folders:
+        if not os.path.exists(folder): continue
+        # Try music.mp3 first
+        if os.path.exists(os.path.join(folder, "music.mp3")):
+            return send_from_directory(folder, "music.mp3")
+        # Try any mp3
+        for f in os.listdir(folder):
+            if f.lower().endswith(".mp3"):
+                return send_from_directory(folder, f)
     return "", 404
+
+@app.route("/music-debug")
+def music_debug():
+    folder = os.path.dirname(os.path.abspath(__file__))
+    cwd = os.getcwd()
+    all_files = os.listdir(folder)
+    mp3s = [f for f in all_files if f.lower().endswith(".mp3")]
+    static = os.path.join(folder, "static")
+    static_mp3s = [f for f in os.listdir(static) if f.lower().endswith(".mp3")] if os.path.exists(static) else []
+    return "<br>".join([
+        f"<b>Script folder:</b> {folder}",
+        f"<b>CWD:</b> {cwd}",
+        f"<b>MP3s in script folder:</b> {mp3s if mp3s else 'NONE'}",
+        f"<b>MP3s in static/:</b> {static_mp3s if static_mp3s else 'NONE'}",
+        f"<b>All files:</b> {all_files}",
+    ])
 
 @app.route("/mascot-debug")
 def mascot_debug():
     folder = os.path.dirname(os.path.abspath(__file__))
-    files = [f for f in os.listdir(folder) if "mascot" in f.lower()]
+    all_files = os.listdir(folder)
+    mascot_files = [f for f in all_files if "mascot" in f.lower()]
+    mp3_files = [f for f in all_files if f.lower().endswith(".mp3")]
+    static_folder = os.path.join(folder, "static")
+    static_mp3 = []
+    if os.path.exists(static_folder):
+        static_mp3 = [f for f in os.listdir(static_folder) if f.lower().endswith(".mp3")]
     return "<br>".join([
         f"<b>Folder:</b> {folder}",
-        f"<b>Mascot files:</b> {files if files else 'NONE — upload mascot_normal.png etc to GitHub repo'}",
+        f"<b>Mascot files:</b> {mascot_files or 'NONE'}",
+        f"<b>MP3 files in project folder:</b> {mp3_files or 'NONE'}",
+        f"<b>MP3 files in static/:</b> {static_mp3 or 'NONE'}",
+        f"<b>All files:</b> {all_files}",
     ])
 
 # ── HTML ─────────────────────────────────────────────────────
@@ -662,11 +696,6 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
 .quiz-fin-txt{font-size:1rem;line-height:1.75;color:rgba(245,230,200,.82);}
 </style></head><body>
 
-<!-- BACKGROUND MUSIC — put your MP3 file in a folder called "static" next to app.py -->
-<audio id="bg-music" loop autoplay style="display:none">
-  <source src="/static/music.mp3" type="audio/mpeg">
-</audio>
-
 <div class="bg"></div>
 
 <div class="topbar">
@@ -701,6 +730,7 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
     </div>
     <audio id="bg-audio" loop preload="auto">
       <source src="/music" type="audio/mpeg">
+      <source src="/static/music.mp3" type="audio/mpeg">
     </audio>
 
     <div class="mascot-area">
@@ -739,7 +769,6 @@ body{background:var(--deep);font-family:'IM Fell English',serif;color:var(--parc
     <div class="inp-bar">
       <textarea id="msg-inp" placeholder="Ask Elarix about {{ chapter.title }}..." rows="1"
         onkeydown="onKey(event)" oninput="growInp(this)"></textarea>
-      <button id="music-btn" onclick="toggleMusic()" title="Toggle background music" style="padding:.75rem .9rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:8px;color:rgba(201,168,76,.6);cursor:pointer;font-size:1.1rem;transition:all .3s;flex-shrink:0;">🎵</button>
       <button id="voice-btn" onclick="toggleVoice()" title="Toggle Elarix voice on/off" style="padding:.75rem .9rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:8px;color:rgba(201,168,76,.6);cursor:pointer;font-size:1.1rem;transition:all .3s;flex-shrink:0;" title="Toggle voice">🔊</button>
       <button id="send-btn" onclick="doSend()">Send</button>
     </div>
