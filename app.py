@@ -1671,7 +1671,7 @@ def api_tts():
     clean = re.sub(r"\*\*([^*]+)\*\*", r"", text)
     clean = re.sub(r"\*([^*]+)\*", r"", clean)
     clean = re.sub(r"A scroll whispers:.*$", "", clean, flags=re.DOTALL).strip()
-    clean = clean.replace("\n", " ").strip()
+    clean = clean.replace("\n", " ").replace("*", "").strip()
     if len(clean) > 500: clean = clean[:500]  # Sarvam limit safety
     try:
         tts_url = "https://api.sarvam.ai/text-to-speech"
@@ -1686,15 +1686,6 @@ def api_tts():
             "enable_preprocessing": True,
             "enc_format": "mp3"
         }).encode("utf-8")
-        req = urllib.request.Request(
-            tts_url,
-            data=payload,
-            headers={
-                "Content-Type": "application/json",
-                "api-subscription-key": SARVAM_API_KEY
-            },
-            method="POST"
-        )
         req = urllib.request.Request(
             tts_url,
             data=payload,
