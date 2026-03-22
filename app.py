@@ -1054,10 +1054,18 @@ function toggleVoice() {
   if (!voiceOn && currentAudio) { currentAudio.pause(); currentAudio = null; }
 }
 
+var ttsLock = false;  // prevent overlapping TTS requests
+var ttsPending = null; // latest pending text
+
 function speakText(text) {
   if (!voiceOn) return;
-  // Stop any current speech
+  // Always cancel current audio immediately
   if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  // If already fetching, just update pending and return
+  if (ttsLock) { ttsPending = text; return; }
+  ttsLock = true;
+  ttsPending = null;
   fetch('/api/tts', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -1065,20 +1073,28 @@ function speakText(text) {
   })
   .then(function(r){ return r.json(); })
   .then(function(d){
-    if (!d.audio || !voiceOn) return;
-    // Play base64 mp3 returned by Sarvam
-    var audio = new Audio('data:audio/mp3;base64,' + d.audio);
-    audio.volume = 1.0;
-    currentAudio = audio;
-    audio.play().catch(function(){});
+    ttsLock = false;
+    if (!voiceOn) return;
+    if (d.audio) {
+      if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+      var audio = new Audio('data:audio/mp3;base64,' + d.audio);
+      audio.volume = 1.0;
+      currentAudio = audio;
+      audio.play().catch(function(){});
+    }
+    // Play any text that came in while we were fetching
+    if (ttsPending) { var t = ttsPending; ttsPending = null; speakText(t); }
   })
   .catch(function(){
-    // Sarvam failed — fall back to browser TTS silently
+    ttsLock = false;
+    // Sarvam failed — fall back to browser TTS
     if (!voiceOn || !window.speechSynthesis) return;
     var clean = text.replace(/\*\*?([^*]+)\*\*?/g,'$1').replace(/\n/g,'. ').trim();
+    window.speechSynthesis.cancel();
     var utt = new SpeechSynthesisUtterance(clean);
     utt.rate = 0.88; utt.pitch = 1.1;
     window.speechSynthesis.speak(utt);
+    if (ttsPending) { var t = ttsPending; ttsPending = null; speakText(t); }
   });
 }
 
