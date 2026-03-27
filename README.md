@@ -1,1 +1,1 @@
-AI chatbot for my MYP-4 design lol helps with learning kerela history
+AI chatbot for my MYP-4 design. Helps you learn history music and medival theme
